@@ -19,7 +19,7 @@ const Register = () => {
     const [last_name, setLastName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [passwordConfirmation, setPasswordConfirmation] = useState('')
+    const [password_confirmation, setPasswordConfirmation] = useState('')
     const [birth_date, setBirthDate] = useState('')
     const [birth_country, setBirthCountry] = useState('')
     const [birth_place, setBirthPlace] = useState('')
@@ -38,7 +38,7 @@ const Register = () => {
             last_name,
             email,
             password,
-            passwordConfirmation: passwordConfirmation,
+            password_confirmation: password_confirmation,
             birth_date,
             birth_country,
             birth_place,
@@ -132,14 +132,14 @@ const Register = () => {
 
                     {/* Confirm Password */}
                     <div className="mt-4">
-                        <Label htmlFor="passwordConfirmation">
+                        <Label htmlFor="password_confirmation">
                             Confirm Password
                         </Label>
 
                         <Input
-                            id="passwordConfirmation"
+                            id="password_confirmation"
                             type="password"
-                            value={passwordConfirmation}
+                            value={password_confirmation}
                             className="block mt-1 w-full"
                             onChange={event =>
                                 setPasswordConfirmation(event.target.value)
