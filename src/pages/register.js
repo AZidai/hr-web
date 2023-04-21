@@ -15,20 +15,38 @@ const Register = () => {
         redirectIfAuthenticated: '/dashboard',
     })
 
-    const [name, setName] = useState('')
+    const [first_name, setFirstName] = useState('')
+    const [last_name, setLastName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [passwordConfirmation, setPasswordConfirmation] = useState('')
+    const [birth_date, setBirthDate] = useState('')
+    const [birth_country, setBirthCountry] = useState('')
+    const [birth_place, setBirthPlace] = useState('')
+    const [home_country, setHomeCountry] = useState('')
+    const [home_place, setHomePlace] = useState('')
+    const [jmbg, setjmbg] = useState('')
+    const [phone_number, setPhoneNumber] = useState('')
+    const [profile_picture, setProfilePicture] = useState('')
     const [errors, setErrors] = useState([])
 
     const submitForm = event => {
         event.preventDefault()
 
         register({
-            name,
+            first_name,
+            last_name,
             email,
             password,
-            password_confirmation: passwordConfirmation,
+            passwordConfirmation: passwordConfirmation,
+            birth_date,
+            birth_country,
+            birth_place,
+            home_country,
+            home_place,
+            jmbg,
+            phone_number,
+            profile_picture,
             setErrors,
         })
     }
@@ -42,21 +60,38 @@ const Register = () => {
                     </Link>
                 }>
                 <form onSubmit={submitForm}>
-                    {/* Name */}
-                    <div>
-                        <Label htmlFor="name">Name</Label>
+                    {/* First Name */}
+                    <div className="mt-4">
+                        <Label htmlFor="first_name">First Name</Label>
 
                         <Input
-                            id="name"
+                            id="first_name"
                             type="text"
-                            value={name}
+                            value={first_name}
                             className="block mt-1 w-full"
-                            onChange={event => setName(event.target.value)}
+                            onChange={event => setFirstName(event.target.value)}
                             required
                             autoFocus
                         />
 
-                        <InputError messages={errors.name} className="mt-2" />
+                        <InputError messages={errors.first_name} className="mt-2" />
+                    </div>
+
+                    {/* Last Name */}
+                    <div className="mt-4">
+                        <Label htmlFor="last_name">Last Name</Label>
+
+                        <Input
+                            id="last_name"
+                            type="text"
+                            value={last_name}
+                            className="block mt-1 w-full"
+                            onChange={event => setLastName(event.target.value)}
+                            required
+                            autoFocus
+                        />
+
+                        <InputError messages={errors.last_name} className="mt-2" />
                     </div>
 
                     {/* Email Address */}
@@ -117,6 +152,145 @@ const Register = () => {
                             className="mt-2"
                         />
                     </div>
+
+                    {/* Birth Date */}
+                    <div className="mt-4">
+                        <Label htmlFor="birth_date">Birth Date</Label>
+
+                        <Input
+                            id="birth_date"
+                            type="date"
+                            value={birth_date}
+                            className="block mt-1 w-full"
+                            onChange={event => setBirthDate(event.target.value)}
+                            required
+                            autoFocus
+                        />
+
+                        <InputError messages={errors.birth_date} className="mt-2" />
+                    </div>
+
+                    {/* Birth Country */}
+                    <div className="mt-4">
+                        <Label htmlFor="birth_country">Birth Country</Label>
+
+                        <Input
+                            id="birth_country"
+                            type="text"
+                            value={birth_country}
+                            className="block mt-1 w-full"
+                            onChange={event => setBirthCountry(event.target.value)}
+                            required
+                            autoFocus
+                        />
+
+                        <InputError messages={errors.birth_country} className="mt-2" />
+                    </div>
+
+                    {/* Birth Place */}
+                    <div className="mt-4">
+                        <Label htmlFor="birth_place">Birth Place</Label>
+
+                        <Input
+                            id="birth_place"
+                            type="text"
+                            value={birth_place}
+                            className="block mt-1 w-full"
+                            onChange={event => setBirthPlace(event.target.value)}
+                            required
+                            autoFocus
+                        />
+
+                        <InputError messages={errors.birth_place} className="mt-2" />
+                    </div>
+
+                    {/* Home Country */}
+                    <div className="mt-4">
+                        <Label htmlFor="home_country">Home Country</Label>
+
+                        <Input
+                            id="home_country"
+                            type="text"
+                            value={home_country}
+                            className="block mt-1 w-full"
+                            onChange={event => setHomeCountry(event.target.value)}
+                            required
+                            autoFocus
+                        />
+
+                        <InputError messages={errors.home_country} className="mt-2" />
+                    </div>
+
+                    {/* Home Place */}
+                    <div className="mt-4">
+                        <Label htmlFor="home_place">Home Place</Label>
+
+                        <Input
+                            id="home_place"
+                            type="text"
+                            value={home_place}
+                            className="block mt-1 w-full"
+                            onChange={event => setHomePlace(event.target.value)}
+                            required
+                            autoFocus
+                        />
+
+                        <InputError messages={errors.home_place} className="mt-2" />
+                    </div>
+
+                    {/* JMBG */}
+                    <div className="mt-4">
+                        <Label htmlFor="jmbg">Social Security Number / JMBG</Label>
+
+                        <Input
+                            id="jmbg"
+                            type="text"
+                            value={jmbg}
+                            className="block mt-1 w-full"
+                            onChange={event => setjmbg(event.target.value)}
+                            required
+                            autoFocus
+                        />
+
+                        <InputError messages={errors.jmbg} className="mt-2" />
+                    </div>
+
+                    {/* Phone Number */}
+                    <div className="mt-4">
+                        <Label htmlFor="phone_number">Phone Number</Label>
+
+                        <Input
+                            id="phone_number"
+                            type="text"
+                            value={phone_number}
+                            className="block mt-1 w-full"
+                            onChange={event => setPhoneNumber(event.target.value)}
+                            required
+                            autoFocus
+                        />
+
+                        <InputError messages={errors.phone_number} className="mt-2" />
+                    </div>
+
+
+
+                    {/* Profile Picture */}
+                    <div className="mt-4">
+                        <Label htmlFor="profile_picture">Profile Picture</Label>
+
+                        <Input
+                            id="profile_picture"
+                            type="file"
+                            value={profile_picture}
+                            className="block mt-1 w-full"
+                            onChange={event => setProfilePicture(event.target.value)}
+                            accept="image/*"
+                            autoFocus
+                        />
+
+                        <InputError messages={errors.profile_picture} className="mt-2" />
+                    </div>
+
 
                     <div className="flex items-center justify-end mt-4">
                         <Link
