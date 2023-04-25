@@ -23,10 +23,13 @@ const Register = () => {
     const [birth_date, setBirthDate] = useState('')
     const [birth_country, setBirthCountry] = useState('')
     const [birth_place, setBirthPlace] = useState('')
+    const [jmbg, setjmbg] = useState('')
     const [home_country, setHomeCountry] = useState('')
     const [home_place, setHomePlace] = useState('')
-    const [jmbg, setjmbg] = useState('')
-    const [phone_number, setPhoneNumber] = useState('')
+    const [home_address, setHomeAddress] = useState('')
+    const [phone, setPhoneNumber] = useState('')
+    const [seniority, setSeniority] = useState('')
+    const [team_lead_id, setTeamLead] = useState('')
     const [profile_picture, setProfilePicture] = useState('')
     const [errors, setErrors] = useState([])
 
@@ -45,7 +48,7 @@ const Register = () => {
             home_country,
             home_place,
             jmbg,
-            phone_number,
+            phone,
             profile_picture,
             setErrors,
         })
@@ -238,6 +241,23 @@ const Register = () => {
                         <InputError messages={errors.home_place} className="mt-2" />
                     </div>
 
+                    {/* Home Address */}
+                    <div className="mt-4">
+                        <Label htmlFor="home_address">Home Address</Label>
+
+                        <Input
+                            id="home_address"
+                            type="text"
+                            value={home_address}
+                            className="block mt-1 w-full"
+                            onChange={event => setHomeAddress(event.target.value)}
+                            required
+                            autoFocus
+                        />
+
+                        <InputError messages={errors.home_address} className="mt-2" />
+                    </div>
+
                     {/* JMBG */}
                     <div className="mt-4">
                         <Label htmlFor="jmbg">Social Security Number / JMBG</Label>
@@ -257,19 +277,19 @@ const Register = () => {
 
                     {/* Phone Number */}
                     <div className="mt-4">
-                        <Label htmlFor="phone_number">Phone Number</Label>
+                        <Label htmlFor="phone">Phone Number</Label>
 
                         <Input
-                            id="phone_number"
+                            id="phone"
                             type="text"
-                            value={phone_number}
+                            value={phone}
                             className="block mt-1 w-full"
                             onChange={event => setPhoneNumber(event.target.value)}
                             required
                             autoFocus
                         />
 
-                        <InputError messages={errors.phone_number} className="mt-2" />
+                        <InputError messages={errors.phone} className="mt-2" />
                     </div>
 
 
