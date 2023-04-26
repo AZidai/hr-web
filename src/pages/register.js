@@ -1,3 +1,4 @@
+import React from 'react';
 import ApplicationLogo from '@/components/ApplicationLogo'
 import AuthCard from '@/components/AuthCard'
 import Button from '@/components/Button'
@@ -6,8 +7,9 @@ import Input from '@/components/Input'
 import InputError from '@/components/InputError'
 import Label from '@/components/Label'
 import Link from 'next/link'
+import { Dropdown } from "@nextui-org/react";
 import { useAuth } from '@/hooks/auth'
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 
 const Register = () => {
     const { register } = useAuth({
@@ -30,12 +32,14 @@ const Register = () => {
     const [phone, setPhoneNumber] = useState('')
     const [seniority, setSeniority] = useState('')
     const [team_lead_id, setTeamLead] = useState('')
+    const [selected, setSelected] = useState(new Set(["text"]));
     const [profile_picture, setProfilePicture] = useState('')
     const [errors, setErrors] = useState([])
 
+    
     const submitForm = event => {
         event.preventDefault()
-
+        
         register({
             first_name,
             last_name,
@@ -53,6 +57,18 @@ const Register = () => {
             setErrors,
         })
     }
+    
+    const teamLeaders = [
+        { id: 1, first_name: "Marko", last_name: "Miric" },
+        { id: 2, first_name: "Bojan", last_name: "Vojvodic" },
+        { id: 3, first_name: "Filip", last_name: "Peskanov" },
+        { id: 4, first_name: "Milan", last_name: "Milanovic" },
+      ];
+
+    const selectedValue = useMemo(
+        () => Array.from(selected).join(", ").replaceAll("_", " "),
+        [selected]
+    );
 
     return (
         <GuestLayout>
@@ -291,8 +307,73 @@ const Register = () => {
 
                         <InputError messages={errors.phone} className="mt-2" />
                     </div>
+                    
+                    {/* Ovo je stara verzija V V V */}
+                    {/* Team Leader
+                    <div className="mt-4">
+                        <Dropdown>
+                            <Dropdown.Button shadow>Choose your team leader</Dropdown.Button>
+                            <Dropdown.Menu aria-label="Dynamic Actions" items={teamLeaders}>
+                                {(teamLead) => (
+                                <Dropdown.Item
+                                    key={teamLead.id}
+                                    value={team_lead_id}
+                                    onChange={event => setTeamLead(event.target.value)}
+                                >
+                                    {teamLead.first_name} {teamLead.last_name}
+                                </Dropdown.Item>
+                                )}
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </div> */}
+
+                    {/* Team Leader */}
+                    <div className="mt-4">
+                        <Label htmlFor="team_lead_id">Choose your team leader</Label>
+
+                        <Dropdown>
+                            <Dropdown.Button solid color="warning" css={{ tt: "capitalize" }}>
+                                {selected}
+                            </Dropdown.Button>
+                            <Dropdown.Menu
+                                aria-label="Single selection actions"
+                                color="secondary"
+                                disallowEmptySelection
+                                selectionMode="single"
+                                selectedKeys={selected}
+                                onSelectionChange={setSelected}
+                                items={teamLeaders}
+                                >
+                            {(teamLead) => (
+                                <Dropdown.Item
+                                    key={teamLead.id} 
+                                    value={team_lead_id}
+                                    onChange={event => setTeamLead(event.target.value)}
+                                >
+                                    {teamLead.first_name} {teamLead.last_name}
+                                </Dropdown.Item>
+                                )}
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </div>
 
 
+                    {/* Seniority */}
+                    <div className="mt-4">
+                        <Label htmlFor="seniority">Seniority</Label>
+
+                        <Input
+                            id="seniority"
+                            type="number"
+                            value={seniority}
+                            className="block mt-1 w-full"
+                            onChange={event => setSeniority(event.target.value)}
+                            required
+                            autoFocus
+                        />
+
+                        <InputError messages={errors.seniority} className="mt-2" />
+                    </div>
 
                     {/* Profile Picture */}
                     <div className="mt-4">
