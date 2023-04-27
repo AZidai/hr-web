@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useMemo } from 'react'
 import ApplicationLogo from '@/components/ApplicationLogo'
 import AuthCard from '@/components/AuthCard'
 import Button from '@/components/Button'
@@ -9,7 +9,6 @@ import Label from '@/components/Label'
 import Link from 'next/link'
 import { Dropdown } from "@nextui-org/react";
 import { useAuth } from '@/hooks/auth'
-import { useState, useMemo } from 'react'
 
 const Register = () => {
     const { register } = useAuth({
@@ -32,14 +31,14 @@ const Register = () => {
     const [phone, setPhoneNumber] = useState('')
     const [seniority, setSeniority] = useState('')
     const [team_lead_id, setTeamLead] = useState('')
-    const [selected, setSelected] = useState(new Set(["text"]));
+    const [selected, setSelected] = useState(new Set([0]));
     const [profile_picture, setProfilePicture] = useState('')
     const [errors, setErrors] = useState([])
 
-    
+
     const submitForm = event => {
         event.preventDefault()
-        
+
         register({
             first_name,
             last_name,
@@ -57,16 +56,19 @@ const Register = () => {
             setErrors,
         })
     }
-    
+
     const teamLeaders = [
         { id: 1, first_name: "Marko", last_name: "Miric" },
         { id: 2, first_name: "Bojan", last_name: "Vojvodic" },
         { id: 3, first_name: "Filip", last_name: "Peskanov" },
         { id: 4, first_name: "Milan", last_name: "Milanovic" },
-      ];
+    ];
 
-    const selectedValue = useMemo(
-        () => Array.from(selected).join(", ").replaceAll("_", " "),
+    const selectedTeamLeader = useMemo(
+        () => {
+            const [first] = selected;
+            return teamLeaders.find(item => item.id === Number(first));
+        },
         [selected]
     );
 
@@ -307,7 +309,7 @@ const Register = () => {
 
                         <InputError messages={errors.phone} className="mt-2" />
                     </div>
-                    
+
                     {/* Ovo je stara verzija V V V */}
                     {/* Team Leader
                     <div className="mt-4">
@@ -329,11 +331,15 @@ const Register = () => {
 
                     {/* Team Leader */}
                     <div className="mt-4">
-                        <Label htmlFor="team_lead_id">Choose your team leader</Label>
+                        <Label htmlFor={team_lead_id}>Choose your team leader</Label>
 
                         <Dropdown>
                             <Dropdown.Button solid color="warning" css={{ tt: "capitalize" }}>
-                                {selected}
+                                {
+                                    selectedTeamLeader ?
+                                        `${selectedTeamLeader.first_name} ${selectedTeamLeader.last_name}` :
+                                        'Choose a team leader'
+                                }
                             </Dropdown.Button>
                             <Dropdown.Menu
                                 aria-label="Single selection actions"
@@ -343,15 +349,15 @@ const Register = () => {
                                 selectedKeys={selected}
                                 onSelectionChange={setSelected}
                                 items={teamLeaders}
-                                >
-                            {(teamLead) => (
-                                <Dropdown.Item
-                                    key={teamLead.id} 
-                                    value={team_lead_id}
-                                    onChange={event => setTeamLead(event.target.value)}
-                                >
-                                    {teamLead.first_name} {teamLead.last_name}
-                                </Dropdown.Item>
+                            >
+                                {(teamLead) => (
+                                    <Dropdown.Item
+                                        key={teamLead.id}
+                                        value={team_lead_id}
+                                        onChange={event => setTeamLead(event.target.value)}
+                                    >
+                                        {teamLead.first_name} {teamLead.last_name}
+                                    </Dropdown.Item>
                                 )}
                             </Dropdown.Menu>
                         </Dropdown>
