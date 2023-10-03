@@ -50,6 +50,11 @@ const Register = () => {
             birth_place,
             home_country,
             home_place,
+            home_address,
+            phone,
+            seniority,
+            team_lead_id,
+            selected,
             jmbg,
             phone,
             profile_picture,
@@ -309,25 +314,6 @@ const Register = () => {
 
                         <InputError messages={errors.phone} className="mt-2" />
                     </div>
-
-                    {/* Ovo je stara verzija V V V */}
-                    {/* Team Leader
-                    <div className="mt-4">
-                        <Dropdown>
-                            <Dropdown.Button shadow>Choose your team leader</Dropdown.Button>
-                            <Dropdown.Menu aria-label="Dynamic Actions" items={teamLeaders}>
-                                {(teamLead) => (
-                                <Dropdown.Item
-                                    key={teamLead.id}
-                                    value={team_lead_id}
-                                    onChange={event => setTeamLead(event.target.value)}
-                                >
-                                    {teamLead.first_name} {teamLead.last_name}
-                                </Dropdown.Item>
-                                )}
-                            </Dropdown.Menu>
-                        </Dropdown>
-                    </div> */}
 
                     {/* Team Leader */}
                     <div className="mt-4">
